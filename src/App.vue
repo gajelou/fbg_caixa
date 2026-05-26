@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 
-const API_URL = "https://scraper-ceb.onrender.com";
+const API_URL = "https://acknowledged-andrew-file-exec.trycloudflare.com";
 
 const agio = ref<number>(30);
 const mostrarPrecos = ref(true);
