@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 
-const API_URL = "https://county-common-latitude-system.trycloudflare.com";
+const API_URL = "https://SUA-URL-DA-API-AQUI";
 
 const agio = ref<number>(30);
 const mostrarPrecos = ref(true);
+
+const vendedorNome = ref("");
+const vendedorContato = ref("");
+const vendedorInstagram = ref("");
 
 const carregando = ref(false);
 const mensagem = ref("");
@@ -49,7 +53,10 @@ async function gerarCatalogo() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        mostrarPrecos: mostrarPrecos.value
+        mostrarPrecos: mostrarPrecos.value,
+        vendedorNome: vendedorNome.value,
+        vendedorContato: vendedorContato.value,
+        vendedorInstagram: vendedorInstagram.value
       })
     });
 
@@ -94,7 +101,7 @@ onMounted(carregarAgio);
         <h2>Gerar catálogo PDF</h2>
 
         <p class="description">
-          Escolha a porcentagem de ágio e defina se deseja exibir os preços no catálogo.
+          Escolha a porcentagem de ágio, defina se deseja exibir os preços e informe os dados do vendedor.
         </p>
 
         <div class="form-group">
@@ -122,6 +129,36 @@ onMounted(carregarAgio);
           <span>Mostrar preços no catálogo</span>
         </label>
 
+        <div class="form-group">
+          <label>Nome do vendedor</label>
+          <input
+            v-model="vendedorNome"
+            class="text-input"
+            type="text"
+            placeholder="Ex: Jair Camargo"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Contato / WhatsApp</label>
+          <input
+            v-model="vendedorContato"
+            class="text-input"
+            type="text"
+            placeholder="Ex: (11) 99999-9999"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Instagram opcional</label>
+          <input
+            v-model="vendedorInstagram"
+            class="text-input"
+            type="text"
+            placeholder="Ex: @camargoebarros"
+          />
+        </div>
+
         <button
           class="primary"
           @click="gerarCatalogo"
@@ -129,24 +166,24 @@ onMounted(carregarAgio);
         >
           <span v-if="carregando" class="loading-content">
             <span class="tool-loader">🔧</span>
-              GERANDO CATÁLOGO...
-            </span>
+            GERANDO CATÁLOGO...
+          </span>
 
-            <span v-else>
-              GERAR CATÁLOGO
-            </span>
+          <span v-else>
+            GERAR CATÁLOGO
+          </span>
         </button>
 
         <div v-if="carregando" class="loading-box">
-        <div class="tools-animation">
-        <span>🔨</span>
-        <span>🔧</span>
-        <span>🪛</span>
-        </div>
+          <div class="tools-animation">
+            <span>🔨</span>
+            <span>🔧</span>
+            <span>🪛</span>
+          </div>
 
-  <p>Montando seu catálogo de ferramentas...</p>
-  <small>Isso pode levar alguns instantes.</small>
-</div>
+          <p>Montando seu catálogo de ferramentas...</p>
+          <small>Isso pode levar alguns instantes.</small>
+        </div>
 
         <p v-if="mensagem" class="success">
           {{ mensagem }}
@@ -260,6 +297,10 @@ h2 {
   margin: 12px 0 24px;
 }
 
+.form-group {
+  margin-bottom: 18px;
+}
+
 .form-group label {
   display: block;
   font-weight: 800;
@@ -275,7 +316,6 @@ h2 {
   border-radius: 8px;
   overflow: hidden;
   background: white;
-  margin-bottom: 18px;
 }
 
 .input-wrap input {
@@ -293,6 +333,16 @@ h2 {
   padding: 16px 18px;
   font-size: 20px;
   font-weight: 900;
+}
+
+.text-input {
+  width: 100%;
+  border: 2px solid #111;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
 }
 
 .checkbox {
