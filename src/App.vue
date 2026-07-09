@@ -10,6 +10,9 @@ const vendedorNome = ref("");
 const vendedorContato = ref("");
 const vendedorInstagram = ref("");
 
+const categorias = ref<string[]>([]);
+const categoriasSelecionadas = ref<string[]>([]);
+
 const carregando = ref(false);
 const mensagem = ref("");
 const erro = ref("");
@@ -24,6 +27,26 @@ async function carregarAgio() {
   } catch {
     erro.value = "Erro ao carregar ágio atual.";
   }
+}
+
+async function carregarCategorias() {
+  try {
+    const resposta = await fetch(`${API_URL}/produtos/categorias`);
+    const dados = await resposta.json();
+
+    categorias.value = dados.categorias || [];
+    categoriasSelecionadas.value = [...categorias.value];
+  } catch {
+    erro.value = "Erro ao carregar categorias.";
+  }
+}
+
+function selecionarTodasCategorias() {
+  categoriasSelecionadas.value = [...categorias.value];
+}
+
+function limparCategorias() {
+  categoriasSelecionadas.value = [];
 }
 
 async function gerarCatalogo() {
@@ -56,7 +79,8 @@ async function gerarCatalogo() {
         mostrarPrecos: mostrarPrecos.value,
         vendedorNome: vendedorNome.value,
         vendedorContato: vendedorContato.value,
-        vendedorInstagram: vendedorInstagram.value
+        vendedorInstagram: vendedorInstagram.value,
+        categoriasSelecionadas: categoriasSelecionadas.value
       })
     });
 
@@ -78,7 +102,10 @@ async function gerarCatalogo() {
   }
 }
 
-onMounted(carregarAgio);
+onMounted(async () => {
+  await carregarAgio();
+  await carregarCategorias();
+});
 </script>
 
 <template>
@@ -101,7 +128,7 @@ onMounted(carregarAgio);
         <h2>Gerar catálogo PDF</h2>
 
         <p class="description">
-          Escolha a porcentagem de ágio, defina se deseja exibir os preços e informe os dados do vendedor.
+          Escolha a porcentagem de ágio, defina se deseja exibir os preços, selecione as categorias e informe os dados do vendedor.
         </p>
 
         <div class="form-group">
@@ -128,6 +155,40 @@ onMounted(carregarAgio);
 
           <span>Mostrar preços no catálogo</span>
         </label>
+
+        <div class="form-group">
+          <label>Categorias do catálogo</label>
+
+          <div class="category-actions">
+            <button type="button" class="small-button" @click="selecionarTodasCategorias">
+              Selecionar todas
+            </button>
+
+            <button type="button" class="small-button secondary" @click="limparCategorias">
+              Limpar
+            </button>
+          </div>
+
+          <div v-if="categorias.length" class="category-list">
+            <label
+              v-for="categoria in categorias"
+              :key="categoria"
+              class="category-item"
+            >
+              <input
+                v-model="categoriasSelecionadas"
+                type="checkbox"
+                :value="categoria"
+              />
+
+              <span>{{ categoria }}</span>
+            </label>
+          </div>
+
+          <p v-else class="category-empty">
+            Nenhuma categoria encontrada. Execute o scraper primeiro.
+          </p>
+        </div>
 
         <div class="form-group">
           <label>Nome do vendedor</label>
