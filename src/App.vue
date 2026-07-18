@@ -242,7 +242,7 @@ onMounted(async () => {
             <span>🪛</span>
           </div>
 
-          <p>Montando seu catálogo de ferramentas...</p>
+          <p>Montando seu catálogo de produtos...</p>
           <small>Isso pode levar alguns instantes.</small>
         </div>
 
