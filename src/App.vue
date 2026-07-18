@@ -112,7 +112,7 @@ onMounted(async () => {
   <main class="page">
     <header class="topbar">
       <div class="brand">
-        <div class="logo-mark">FBG CAIXA FECHADA</div>
+        <div class="logo-mark">FBG</div>
 
         <div>
           <h1>FBG</h1>
