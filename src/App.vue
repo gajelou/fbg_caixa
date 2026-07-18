@@ -123,7 +123,7 @@ onMounted(async () => {
 
     <section class="hero">
       <div class="panel">
-        <span class="tag">FERRAMENTAS • VARIEDADES • ATACADO</span>
+        <span class="tag">CONTROLES REMOTOS • FERRAMENTAS</span>
 
         <h2>Gerar catálogo PDF</h2>
 
@@ -237,7 +237,7 @@ onMounted(async () => {
 
         <div v-if="carregando" class="loading-box">
           <div class="tools-animation">
-            <span>🔨</span>
+            <span>U+23F5</span>
             <span>🔧</span>
             <span>🪛</span>
           </div>
