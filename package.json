@@ -1,35 +1,14 @@
 {
-  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/server.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "agent-base": "5.1.1",
-    "axios": "^1.16.1",
-    "axios-cookiejar-support": "^5.0.5",
-    "cheerio": "1.0.0-rc.12",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "node-cron": "^4.2.1",
-    "pdfkit": "^0.18.0",
-    "playwright": "^1.55.0",
-    "tough-cookie": "^6.0.2"
+    "vue": "^3.x"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/node": "^25.9.5",
-    "@types/node-cron": "^3.0.11",
-    "@types/pdfkit": "^0.17.6",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.22.3",
-    "typescript": "^6.0.3"
-  },
-  "overrides": {
-    "http-cookie-agent": {
-      "agent-base": "5.1.1"
-    }
+    "vite": "...",
+    "@vitejs/plugin-vue": "..."
   }
 }
