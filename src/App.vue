@@ -265,8 +265,8 @@ onMounted(async () => {
         <div class="logo-mark">FBG</div>
 
         <div>
-          <h1>FBG COMERCIAL</h1>
-          <p>GERADOR DE CATÁLOGO ATACADO</p>
+          <h1>FBG CAIXA FECHADA</h1>
+          <p>GERADOR DE CATÁLOGO ATACADO CAIXA FECHADA</p>
         </div>
       </div>
     </header>
